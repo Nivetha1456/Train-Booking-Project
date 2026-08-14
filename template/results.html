@@ -1,0 +1,130 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Train Results</title>
+{% load static %}
+<style>
+body{
+    font-family: Arial, sans-serif;
+    margin:0;
+    padding:30px;
+
+    background:
+    
+    url("{% static 'background_4.png' %}");
+
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    min-height:80vh;
+}
+
+
+h2{
+    text-align:center;
+    color:black;
+    margin-bottom:30px;
+}
+
+table{
+    width:90%;
+    margin:auto;
+    border-collapse:collapse;
+    background:white;
+    box-shadow:0 5px 20px rgba(0,0,0,0.15);
+    border-radius:10px;
+    overflow:hidden;
+}
+
+th{
+    background:darkblue;
+    color:white;
+    padding:15px;
+    font-size:16px;
+}
+
+td{
+    padding:15px;
+    text-align:center;
+    border-bottom:1px solid #ddd;
+}
+
+tr:hover{
+    background:#f5f9ff;
+}
+
+.book-btn{
+    background:darkgreen;
+    color:white;
+    text-decoration:none;
+    padding:8px 18px;
+    border-radius:5px;
+    font-weight:bold;
+}
+
+.book-btn:hover{
+    /* background:#1f7d32; */
+     background:green;
+}
+
+</style>
+
+</head>
+<body>
+
+<h2> AVAILABLE TRAINS </h2>
+
+<table>
+    <tr>
+        <th>Train No</th>
+        <th>Train Name</th>
+        <th>Route</th>
+        <th>Journey Date</th>
+        <th>Time</th>
+        <th>Action</th>
+    </tr>
+
+    {% for train in trains %}
+    <tr>
+
+        <td>{{ train.train_no }}</td>
+        <td>{{ train.train_name }}</td>
+        <td>{{ train.source }} → {{ train.destination }}</td>
+        <td>{{ journey_date }}</td>
+        <td>{{ train.departure_time }} → {{ train.arrival_time }}</td>
+
+        <td>
+            <a class="book-btn"
+               href="/book/{{ train.id }}/?class=SL&journey_date={{ journey_date }}">
+                Book Now
+            </a>
+        </td>
+
+    </tr>
+
+    {% empty %}
+    <tr>
+        <td colspan="6">No trains found ❌</td>
+    </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

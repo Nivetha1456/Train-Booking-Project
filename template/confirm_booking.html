@@ -1,0 +1,49 @@
+
+<form method="POST">
+    {% csrf_token %}
+    <button type="submit" name="confirm_booking">Confirm Booking</button>
+</form>
+
+
+<h2>Booking Summary</h2>
+
+<table border="1" cellpadding="10">
+    <tr>
+        <th>Train_No</th>
+        <th>Train_Name</th>
+        <th>Route</th>
+        <th>Time</th>
+        <th>Class</th>
+        <th>Price</th>
+    </tr>
+
+    <tr>
+    
+        <td>{{  train.train_no }}</td>
+        <td>{{train.train_name }}</td>
+        <td>{{ train.source }} → {{ train.destination }}</td>
+        <td>{{ train.departure_time }} → {{ train.arrival_time }}</td>
+        <td>{{train. selected_class }}</td>
+        <td>₹{{ price }}</td>
+    </tr>
+</table>
+
+<br>
+
+<button>Confirm confirm_booking</button>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+

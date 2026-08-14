@@ -1,0 +1,170 @@
+   
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Train Results</title>
+</head>
+<body>
+
+<h2>🚆 Available Trains</h2>
+
+<table border="1" cellpadding="10">
+
+    <tr>
+        <th>Train Name</th>
+        <th>Route</th>
+        <th>Journey Date</th>
+        <th>Time</th>
+        <th>SL</th>
+        <th>3AC</th>
+        <th>2AC</th>
+        <th>1AC</th>
+    </tr>
+
+    {% for train in trains %}
+
+    <tr>
+
+        <td>{{ train.train_name }}</td>
+
+        <td>
+            {{ train.source }} → {{ train.destination }}
+        </td>
+
+        <td>{{ train.Journey_Date }}</td>
+
+        <td>
+            {{ train.departure_time }} → {{ train.arrival_time }}
+        </td>
+
+        <td>
+            ₹{{ train.classes.SL }}
+            <br><br>
+
+            <a href="{% url 'book_train' train.id %}?class=SL&journey_date={{ train.Journey_Date }}">
+                Book
+            </a>
+        </td>
+
+        <td>
+            ₹{{ train.classes.3AC }}
+            <br><br>
+
+            <a href="{% url 'book_train' train.id %}?class=3AC&journey_date={{ train.Journey_Date }}">
+                Book
+            </a>
+        </td>
+
+        <td>
+            ₹{{ train.classes.2AC }}
+            <br><br>
+
+            <a href="{% url 'book_train' train.id %}?class=2AC&journey_date={{ train.Journey_Date }}">
+                Book
+            </a>
+        </td>
+
+        <td>
+            ₹{{ train.classes.1AC }}
+            <br><br>
+
+            <a href="{% url 'book_train' train.id %}?class=1AC&journey_date={{ train.Journey_Date }}">
+                Book
+            </a>
+        </td>
+
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+

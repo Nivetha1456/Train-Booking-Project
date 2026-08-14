@@ -1,0 +1,561 @@
+
+ 
+ {% load static %}
+
+ <style>
+
+
+
+body{
+    font-family: Arial, sans-serif;
+    margin:0;
+    padding:30px;
+
+    background:
+    
+    /* url("{% static 'images-2.png' %}"); */
+     url("{% static 'background_4.png' %}");
+
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    min-height:80vh;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+}
+
+h2,h3{
+    color: black;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 4px 15px rgba(0,0,0,0.1);
+    margin-bottom:25px;
+}
+
+table{
+    width:90%;
+    border-collapse:collapse;
+    background:white;
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+table th{
+    background:darkblue;
+    color:white;
+    padding:12px;
+}
+
+table td{
+    padding:12px;
+    text-align:center;
+    border-bottom:1px solid #ddd;
+}
+
+table tr:hover{
+    background:#f5f9ff;
+}
+
+a{
+    text-decoration:none;
+    color:white;
+}
+
+.select-btn{
+    padding:8px 15px;
+    border-radius:6px;
+}
+
+.select-btn:hover{
+    background:green;
+  
+}
+
+input,
+select{
+    width:100%;
+    padding:10px;
+    border:1px solid #ccc;
+    border-radius:6px;
+    margin-bottom:10px;
+}
+
+
+ button{
+    background:darkgreen;
+    color:white;
+    border:none;
+    padding:10px 20px;
+    border-radius:6px;
+    cursor:pointer;
+} 
+
+ button:hover{
+    background:green;
+} 
+
+.passenger-form{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 4px 15px rgba(0,0,0,0.1);
+}
+
+.summary{
+    background:#e8f0ff;
+    padding:20px;
+    border-radius:12px;
+    margin-top:20px;
+    text-align:center;
+    font-size:18px;
+    font-weight:bold;
+}
+
+.delete-btn{
+    background:red;
+}
+
+.delete-btn:hover{
+    background:darkred;
+}
+
+
+.book-btn{
+    background:darkgreen;
+    color:white;
+    padding:10px 20px;
+    border-radius:4px;
+    text-decoration:none;
+    font-weight:bold;
+    display:inline-block;
+}
+
+ button:hover{
+    background:green;
+} 
+
+
+
+.train-table{
+    width: 40%;          
+    font-size: 15px;    
+}
+
+.train-table th,
+.train-table td{
+    padding: 10px 15px; 
+}
+
+.train-table th{
+    background: darkblue;
+    color: white;
+}
+
+.train-table tr:nth-child(even){
+    background: #f8f9fa;
+}
+
+
+
+.seat-table{
+    width: 40%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.seat-table th{
+    background: #15159b;
+    color: white;
+    padding: 12px;
+    text-align: center;
+}
+
+.seat-table td{
+    padding: 12px;
+    text-align: center;
+    background: white;
+}
+
+.seat-table tr:nth-child(even){
+    background: #f5f7ff;
+}
+
+.seat-table tr:hover{
+    background: #e8ecff;
+}
+
+
+
+
+.passenger-table{
+    width:79%;
+    border-collapse:collapse;
+    margin-top:15px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+.passenger-table th{
+    background:#15159b;
+    color:white;
+    padding:12px;
+    text-align:center;
+}
+
+.passenger-table td{
+    padding:10px;
+    text-align:center;
+    border:1px solid #ddd;
+    background:white;
+}
+
+.passenger-table tr:nth-child(even){
+    background:#f8f9fa;
+}
+
+.passenger-table tr:hover{
+    background:#eef2ff;
+}
+
+
+
+
+form input,
+form select{
+    width: 250px;
+    padding: 6px;
+}
+
+.delete-btn{
+    background: #1f3a3a ;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    width: 80px;
+}
+
+.delete-btn:hover{
+    background: darkslategrey;
+}
+
+
+
+
+
+.book-btn{
+  
+    background:darkgreen;
+    color:white;
+    padding:10px 25px;
+    border-radius:6px;
+    text-decoration:none;
+  
+}
+
+.book-btn:hover{
+    background:green;      
+    color:white;
+    
+}
+
+
+
+
+
+
+</style>
+
+ 
+<h3>TRAIN DETAILS</h3>
+<table border="1" cellpadding="10">
+    <tr>
+        <th>Train_No</th>
+        <th>Train_Name</th>
+        <th>Route</th>
+        <th>Journey Date</th>
+        <th>Time</th>
+        
+
+    </tr>
+    <tr>
+        <td>{{ train.train_no }}</td>
+        <td>{{ train.train_name }}</td>
+        <td>{{ train.source }} → {{ train.destination }}</td>
+        <td>{{ journey_date }}</td>
+        <td>{{ train.departure_time }} → {{ train.arrival_time }}</td>
+        
+
+    </tr>
+</table>
+
+<br>  
+
+<br>
+
+
+
+
+
+<h3>TICKET PRICE</h3>
+
+<table class="train-table">
+
+    <tr>
+        <th>Class</th>
+        <th>Price</th>
+        <th>Book Ticket</th>
+    </tr>
+
+    <tr>
+        <td>Sleeper (SL)</td>
+        <td>₹{{ train.classes.SL }}</td>
+        <td>
+            <a class="book-btn" href="?class=SL&journey_date={{ journey_date }}">
+                Book Now
+            </a>
+        </td>
+    </tr>
+
+    <tr>
+        <td>AC 3 Tier (3AC)</td>
+        <td>₹{{ train.classes.3AC }}</td>
+        <td>
+            <a class="book-btn" href="?class=3AC&journey_date={{ journey_date }}">
+                Book Now
+            </a>
+        </td>
+    </tr>
+
+    <tr>
+        <td>AC 2 Tier (2AC)</td>
+        <td>₹{{ train.classes.2AC }}</td>
+        <td>
+            <a class="book-btn" href="?class=2AC&journey_date={{ journey_date }}">
+                Book Now
+            </a>
+        </td>
+    </tr>
+
+    <tr>
+        <td>First AC (1AC)</td>
+        <td>₹{{ train.classes.1AC }}</td>
+        <td>
+            <a class="book-btn" href="?class=1AC&journey_date={{ journey_date }}">
+                Book Now
+            </a>
+        </td>
+    </tr>
+
+</table>
+
+<br>
+
+<br>
+
+
+<h3>SEAT AVAILABILITY</h3>
+
+<table class="seat-table">
+
+    <tr>
+        <th>Class</th>
+        <th>Available Seats</th>
+    </tr>
+
+    <tr>
+        <td>Sleeper (SL)</td>
+        <td>{{ train.seats.SL }}</td>
+    </tr>
+
+    <tr>
+        <td>AC 3 Tier (3AC)</td>
+        <td>{{ train.seats.3AC }}</td>
+    </tr>
+
+    <tr>
+        <td>AC 2 Tier (2AC)</td>
+        <td>{{ train.seats.2AC }}</td>
+    </tr>
+
+    <tr>
+        <td>First AC (1AC)</td>
+        <td>{{ train.seats.1AC }}</td>
+    </tr>
+
+</table>
+
+<br>
+
+<br>  
+
+
+
+
+
+
+<h3>PASSENGER DETAILS</h3>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <input type="text" name="name" placeholder="Name" required>
+
+    <input type="number" name="age" placeholder="Age" required>
+
+    <select name="gender">
+        <option>Male</option>
+        <option>Female</option>
+        <option>Other</option>
+    </select>
+
+     <!-- <select name="berth_preference">
+        <option value="">No Preference</option>
+        <option value="Lower">Lower</option>
+        <option value="Middle">Middle</option>
+        <option value="Upper">Upper</option>
+        <option value="Side Lower">Side Lower</option>
+        <option value="Side Upper">Side Upper</option>
+    </select>  -->
+
+
+
+
+ <select name="berth_preference" required>
+
+{% if selected_class == "SL" %}
+    <option value="">Select Berth</option>
+    <option value="Lower">Lower</option>
+    <option value="Middle">Middle</option>
+    <option value="Upper">Upper</option>
+    <option value="Side Lower">Side Lower</option>
+    <option value="Side Upper">Side Upper</option>
+
+{% elif selected_class == "3AC" %}
+    <option value="">Select Berth</option>
+    <option value="Lower">Lower</option>
+    <option value="Middle">Middle</option>
+    <option value="Upper">Upper</option>
+
+{% elif selected_class == "2AC" %}
+    <option value="">Select Berth</option>
+    <option value="Lower">Lower</option>
+    <option value="Upper">Upper</option>
+
+{% elif selected_class == "1AC" %}
+    <option value="">Select Berth</option>
+    <option value="Lower Cabin">Lower Cabin</option>
+    <option value="Upper Cabin">Upper Cabin</option>
+    <option value="Coupe">Coupe (2 Berth)</option>
+
+{% endif %}
+
+</select> 
+
+
+
+    <button type="submit" name="add">
+        Add Passenger
+    </button>
+
+</form>
+
+<br>
+
+<table class="passenger-table">
+
+    <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Gender</th>
+        <th>Berth Preference</th>
+        <th>Action</th>
+    </tr>
+
+    {% for p in passengers %}
+
+    <tr>
+        <td>{{ p.name }}</td>
+        <td>{{ p.age }}</td>
+        <td>{{ p.gender }}</td>
+        <td>{{ p.berth_preference }}</td>
+
+        <td>
+            <form method="POST">
+                {% csrf_token %}
+
+                <input type="hidden"
+                       name="delete_index"
+                       value="{{ forloop.counter0 }}">
+
+                <!-- <button type="submit" name="delete">
+                    Delete
+                </button> -->
+
+                <button type="submit" name="delete" class="delete-btn">
+                     Delete
+                </button>
+            </form>
+        </td>
+
+    </tr>
+
+    {% empty %}
+
+    <tr>
+        <td colspan="5">No passengers added</td>
+    </tr>
+
+    {% endfor %}
+
+</table> 
+
+
+<br>
+
+
+
+
+
+<form method="POST">
+    {% csrf_token %}
+    <button type="submit" name="confirm" class="confirm-btn">
+        Confirm Booking
+    </button>
+</form>
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 

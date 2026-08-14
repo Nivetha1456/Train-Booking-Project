@@ -1,0 +1,315 @@
+
+
+
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Booking Success</title>
+
+    <style>
+
+        body{
+          font-family: Arial, sans-serif;
+          margin:0;
+          padding:30px;
+          background:
+          url("{% static 'background_4.png' %}");
+          background-size:cover;
+          background-position:center;
+          background-repeat:no-repeat;
+          min-height:80vh;
+}
+
+
+        .container{
+            width:500px;
+            margin:auto;
+            background:white;
+            padding:30px;
+            border-radius:15px;
+            box-shadow:0 5px 20px rgba(0,0,0,0.15);
+        }
+
+        h2,h3{
+            text-align:left;
+            color:black;
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+            margin-bottom:70px;
+            color:white;
+            border-radius:18px;
+            overflow:hidden;
+            border-collapse:separate;
+            border-spacing:0;
+            box-shadow:0 8px 20px rgba(0,0,0,0.15);
+
+
+        }
+
+        table th{
+            
+            background:darkblue;
+            color:white;
+            padding:18px 20px;   
+            border:none;
+            font-size:18px;
+            font-weight:bold;
+            text-align:left;
+            
+
+
+
+
+        }
+
+        table td{
+            border:1px solid #ddd;
+            padding:12px;
+            text-align:center;
+            background:darkblue;
+            color:white;
+            padding:18px 20px;
+            border:none;
+            font-size:18px;
+}
+    
+        
+ 
+         input[type="text"]{
+            width:70%;
+            padding:12px;
+            border:1px solid #ccc;
+            border-radius:8px;
+            box-sizing:border-box;
+        } 
+
+
+
+        input[type="text"],
+        input[type="tel"]{
+        width:70%;
+        padding:12px;
+        border:1px solid #ccc;
+        border-radius:8px;
+        box-sizing:border-box;
+      }
+
+
+
+
+
+        button{
+            width:20%;
+            padding:12px;
+            background:darkgreen;
+            color:white;
+            border:none;
+            border-radius:8px;
+            cursor:pointer;
+            font-size:16px;
+        }
+
+        button:hover{
+            background: green;
+        }
+
+    
+
+
+
+
+        .captcha-box{
+    width:130px;              
+    height:50px;              
+    line-height:50px;         
+    letter-spacing:7px;
+    text-align:center;
+    font-size:24px;
+    font-weight:bold;
+    color:darkcyan;  
+    background:white;
+    border:3px solid black;   
+    border-radius:5px;
+    margin:15px auto;
+}
+
+
+
+
+input[name="user_captcha"]{
+ width:130px;             
+    height:50px;             
+    line-height:50px;         
+    letter-spacing:7px;
+    text-align:center;
+    font-size:20px;
+    font-weight:bold;
+    color:black;  
+    background:white;
+    border:2px solid black;   
+    border-radius:5px;
+    margin:15px auto;
+}
+
+ 
+
+
+
+
+table tr:not(:last-child) td,
+table tr:not(:last-child) th{
+    border-bottom:1px solid rgba(255,255,255,0.35);
+}
+    </style>
+
+</head>
+<body>
+
+<div class="container">
+
+    <h3>BOOKING SUMMARY</h3>
+
+    <table>
+        <tr>
+            <th>Total Passengers</th>
+            <th>{{ total_passengers }}</th>
+        </tr>
+
+        <tr>
+            <th>Total Amount</th>
+            <th>₹{{ total_price }}</th>
+        </tr>
+    </table>
+
+    {% if not show_captcha %}
+
+    <h3>Passenger Mobile Number</h3>
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+         <!-- <input type="text"
+               name="mobile"
+               placeholder="Enter Mobile Number"
+               required>  -->
+
+
+          <input
+    type="tel"
+    name="mobile"
+    id="mobile"
+    class="mobile-input"
+    placeholder="Enter Mobile Number"
+    maxlength="10"
+    minlength="10"
+    pattern="[0-9]{10}"
+    inputmode="numeric"
+    required
+>
+
+
+
+
+
+
+
+        <br><br>
+
+        <button type="submit" name="showcaptcha">
+            Continue
+        </button>
+
+    </form> 
+
+
+
+
+
+
+    {% endif %}
+
+    {% if show_captcha %}
+
+    <h3>Mobile Number</h3>
+
+    <input type="text"
+           value="{{ mobile }}"
+           readonly>
+
+    <br><br>
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <h3>Captcha Verification</h3>
+
+        <div class="captcha-box">
+            {{ captcha }}
+        </div>
+
+
+        <input type="text"
+       name="user_captcha"    
+       required>
+
+
+
+
+        <br><br>
+
+        <button type="submit" name="verifycaptcha">
+            Continue
+        </button>
+
+    </form>
+
+    {% endif %}
+
+</div>
+
+</body>
+</html> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

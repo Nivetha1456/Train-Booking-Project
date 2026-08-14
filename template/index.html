@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Train Booking</title>
+</head>
+
+<body>
+
+<h2>🚆 Train Booking Form</h2>
+
+<form method="POST"
+      action="{% url 'search_trains' %}">
+
+    {% csrf_token %}
+
+    <label>Source:</label>
+
+    <input type="text"
+           name="source"
+           required>
+
+    <br><br>
+
+    <label>Destination:</label>
+
+    <input type="text"
+           name="destination"
+           required>
+
+    <br><br>
+
+    <label>Journey Date:</label>
+
+    <input type="date"
+           name="journey_date"
+           required>
+
+    <br><br>
+
+
+     <label>Class:</label>
+
+    <select name="class" required>
+
+        <option value="">-- Select Class --</option>
+
+        <option value="SL">
+            Sleeper (SL)
+        </option>
+
+        <option value="3AC">
+            AC 3 Tier (3AC)
+        </option>
+
+        <option value="2AC">
+            AC 2 Tier (2AC)
+        </option>
+
+        <option value="1AC">
+            First AC (1AC)
+        </option>
+
+    </select>
+
+
+    <br><br>
+    
+
+    <button type="submit">
+        Search
+    </button>
+
+</form>
+
+<div class="features">
+
+    <div class="feature-card">
+        <div class="icon">📍</div>
+        <h3>PNR Status</h3>
+        <p>Check ticket status using PNR number.</p>
+        <a href="/pnr/" class="btn">Check</a>
+    </div>
+
+
+
+</body>
+</html> 
+
+
+
+

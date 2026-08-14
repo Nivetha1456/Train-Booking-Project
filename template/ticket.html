@@ -1,0 +1,289 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Train Ticket</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+  body{
+    font-family: 'Poppins', sans-serif;  
+    background:
+     linear-gradient(rgba(0,0,0,.35),rgba(0,0,0,.35)),  
+    url("{% static 'background_4.png' %}");
+
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+
+    min-height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:40px;
+}
+
+.ticket-container{
+    width:900px;
+}
+
+.ticket-title{
+    text-align:center;
+    color:darkblue;
+    font-size:40px;
+    margin-bottom:20px;
+   
+}
+
+.ticket{
+    background:rgba(255,255,255,.96);
+    border-radius:18px;
+    padding:30px;
+    box-shadow:0 10px 30px rgba(0,0,0,.35);
+    border-top:8px solid #0d6efd;
+}
+
+.confirmed{
+    text-align:center;
+    color:green;
+    font-size:32px;
+    margin-bottom:20px;
+}
+
+.ticket-info{
+    line-height:2.2;
+    font-size:18px;
+}
+
+.ticket-info b{
+    color:#003566;
+}
+
+.amount{
+    color:black;
+    font-size:22px;
+    font-weight:bold;
+}
+
+.passenger-title{
+    margin-top:25px;
+    margin-bottom:10px;
+    color:#003566;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+table th{
+    background:#0d6efd;
+    color:white;
+    padding:12px;
+}
+
+table td{
+    padding:12px;
+    border:1px solid #ddd;
+    text-align:center;
+}
+
+table tr:nth-child(even){
+    background:#f4f8ff;
+}
+
+table tr:hover{
+    background:#e9f2ff;
+}
+
+
+
+
+
+
+p{
+    font-size:18px;
+    margin:18px 0;
+}
+
+p strong{
+    color:#0d3b78;      /* Blue labels */
+    font-weight:bold;
+}
+
+.value{
+    color:#000;         /* Black */
+    font-weight:bold;   /* Bold */
+    font-size:18px;
+}
+
+
+
+
+
+
+
+</style>
+
+</head>
+
+<body>
+
+<div class="ticket-container">
+
+<h1 class="ticket-title">
+    Train Ticket
+</h1>
+
+<div class="ticket">
+
+<h2 class="confirmed">
+ Booking Confirmed
+</h2>
+
+<hr><br>
+
+<div class="ticket-info">
+
+
+<p><strong>PNR Number :</strong> <span class="value">{{ pnr }}</span></p>
+
+<p><strong>Train Name :</strong> <span class="value">{{ train_name }}</span></p>
+
+<p><strong>Route :</strong> <span class="value">{{ source }} → {{ destination }}</span></p>
+
+<p><strong>Class :</strong> <span class="value">{{ selected_class  }}</span></p>
+
+<p><strong>Journey Date :</strong> <span class="value">{{ journey_date }}</span></p>
+
+
+
+
+
+<p>
+<b>Total Paid :</b>
+<span class="amount">₹{{ total_price }}</span>
+</p>
+
+</div>
+
+<h3 class="passenger-title">
+Passenger Details
+</h3>
+
+<table>
+
+<tr>
+<th>S.No</th>
+<th>Name</th>
+<th>Age</th>
+<th>Gender</th>
+<th>Current Status</th>
+</tr>
+
+{% for passenger in passengers %}
+
+<tr>
+
+<td>{{ forloop.counter }}</td>
+
+<td>{{ passenger.name }}</td>
+
+<td>{{ passenger.age }}</td>
+
+<td>{{ passenger.gender }}</td>
+
+<!-- <td>
+S9/{{ passenger.seat }}
+{{ passenger.berth }}
+</td> -->
+
+<td>
+
+  {{ passenger.coach }} / {{ passenger.seat }} / {{ passenger.berth_preference }}
+</td>
+
+</tr>
+
+{% endfor %}
+
+
+
+</table>
+
+</div>
+
+</div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

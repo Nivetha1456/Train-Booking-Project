@@ -1,0 +1,275 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Credit Card Payment</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+
+    background:url("{% static 'background_4.png' %}");
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+
+    min-height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+}
+
+.container{
+
+    width:500px;
+    background:#fff;
+    padding:35px;
+    border-radius:15px;
+    box-shadow:0 10px 30px rgba(0,0,0,.35);
+
+}
+
+h1{
+
+    text-align:center;
+    color:darkblue;
+    margin-bottom:20px;
+
+}
+
+.amount{
+
+    text-align:center;
+    color:green;
+    font-size:25px;
+    font-weight:bold;
+    margin-bottom:30px;
+
+}
+
+label{
+
+    display:block;
+    font-weight:bold;
+    margin-top:18px;
+    margin-bottom:8px;
+    color:#333;
+
+}
+
+input{
+
+    width:100%;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:16px;
+
+}
+
+.row{
+
+    display:flex;
+    gap:15px;
+
+}
+
+.row .box{
+
+    flex:1;
+
+}
+
+.pay-btn{
+
+    width:100%;
+    padding:15px;
+    margin-top:30px;
+
+    background:darkblue;
+    color:white;
+
+    border:none;
+    border-radius:8px;
+
+    font-size:18px;
+    font-weight:bold;
+
+    cursor:pointer;
+
+}
+
+.pay-btn:hover{
+
+    background:#001f70;
+
+}
+
+.note{
+
+    text-align:center;
+    margin-top:18px;
+    color:#333;
+    font-size:14px;
+
+}
+
+
+.pay-btn{
+    position:relative;
+    width:100%;
+    height:55px;
+
+    background:darkblue;
+    color:white;
+
+    border:none;
+    border-radius:8px;
+
+    font-size:18px;
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.pay-btn:hover{
+    background: #001f70;
+}
+
+.pay-text{
+    display:block;
+    text-align:center;
+    color:white;
+}
+
+.lock-icon{
+    position:absolute;
+    right:20px;
+    top:50%;
+    transform:translateY(-50%);
+
+    color:white;
+    font-size:18px;
+}
+
+
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1> CREDIT CARD</h1>
+
+<div class="amount">
+
+Amount:₹{{ total_price }}
+
+</div>
+
+<form method="POST">
+
+{% csrf_token %}
+
+<label>Card Holder Name</label>
+
+<input
+type="text"
+name="card_name"
+placeholder="Enter Card Holder Name"
+required>
+
+
+
+
+
+
+<label>Card Number</label>
+
+<input
+type="text"
+name="card_number"
+maxlength="16"
+placeholder="1234 5678 9012 3456"
+required>
+
+<div class="row">
+
+
+
+
+<div class="box">
+
+    <label>Expiry Date</label>
+
+    <input
+        type="month"
+        name="expiry"
+        required>
+
+</div>
+
+
+
+
+<div class="box">
+
+<label>CVV</label>
+
+<input
+type="password"
+name="cvv"
+placeholder="***"
+maxlength="3"
+required>
+
+
+
+
+</div>
+
+</div>
+
+<button type="submit" class="pay-btn">
+
+    <span class="pay-text">
+        PAY NOW ₹{{ total_price }}
+    </span>
+
+    <i class="fa-solid fa-lock lock-icon"></i>
+
+</button>
+
+</form>
+
+<div class="note">
+Your transaction is protected with 256-bit SSL encryption.
+</div>
+
+</div>
+
+</body>
+</html>
+
+

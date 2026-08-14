@@ -1,0 +1,294 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cancel Ticket</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    /* font-family:Segoe UI, sans-serif; */
+     font-family: Calibri, sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:
+    linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.55)),
+    url("/static/railway-2.png");
+
+    background-size:cover;
+    background-position:center;
+}
+
+.cancel-container{
+
+    width:700px;
+    background:#ffffff;
+    padding:35px;
+    border-radius:18px;
+    box-shadow:0 10px 25px rgba(0,0,0,.35);
+
+}
+
+h2{
+
+    text-align:center;
+    margin-bottom:30px;
+    color:#111;
+
+}
+
+
+.search-form{
+
+    display:flex;
+    gap:12px;
+    margin-bottom:25px;
+
+}
+
+.search-form input{
+
+    flex:1;
+    padding:14px;
+    font-size:17px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    outline:none;
+
+}
+
+.search-btn{
+
+    width:150px;
+    border:none;
+    border-radius:8px;
+    background:#0d6efd;
+    color:#fff;
+    font-size:16px;
+    cursor:pointer;
+
+}
+
+.search-btn:hover{
+
+    background:#0b5ed7;
+
+}
+
+
+
+.ticket-box{
+
+    border:1px solid #ddd;
+    border-radius:10px;
+    overflow:hidden;
+    margin-top:20px;
+
+}
+
+.ticket-table{
+
+    width:100%;
+    border-collapse:collapse;
+
+}
+
+.ticket-table th{
+
+    width:35%;
+    background:#f3f3f3;
+    padding:15px;
+    text-align:left;
+    border:1px solid #ddd;
+
+}
+
+.ticket-table td{
+
+    padding:15px;
+    text-align:left;
+    border:1px solid #ddd;
+    background:#fff;
+
+}
+
+
+
+.cancel-btn{
+
+    width:100%;
+    margin-top:25px;
+    padding:15px;
+    background:#dc3545;
+    color:white;
+    border:none;
+    border-radius:8px;
+    font-size:19px;
+    font-weight:bold;
+    cursor:pointer;
+
+}
+
+.cancel-btn:hover{
+
+    background:#bb2d3b;
+
+}
+
+
+
+.success{
+
+    margin-top:25px;
+    background:#d1e7dd;
+    color:#0f5132;
+    padding:15px;
+    text-align:center;
+    border-radius:8px;
+    font-weight:bold;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="cancel-container">
+
+<h2>CANCEL TICKET</h2>
+
+<form method="POST" class="search-form">
+
+{% csrf_token %}
+
+<input
+type="number"
+name="pnr"
+placeholder="Enter PNR Number"
+required>
+
+<button
+type="submit"
+class="search-btn">
+
+Search Ticket
+
+</button>
+
+</form>
+
+{% if booking %}
+
+<div class="ticket-box">
+
+<table class="ticket-table">
+
+<tr>
+
+<th>PNR Number</th>
+
+<td>{{ booking.pnr }}</td>
+
+</tr>
+
+<tr>
+
+<th>Train Name</th>
+
+<td>{{ booking.train_name }}</td>
+
+</tr>
+
+<tr>
+
+<th>Route</th>
+
+<td>{{ booking.source }} → {{ booking.destination }}</td>
+
+</tr>
+
+<tr>
+
+<th>Journey Date</th>
+
+<td>{{ booking.journey_date }}</td>
+
+</tr>
+
+<tr>
+
+<th>Class</th>
+
+<td>{{ booking.class }}</td>
+
+</tr>
+
+<tr>
+
+<th>Payment Method</th>
+
+<td>{{ booking.payment_method }}</td>
+
+</tr>
+
+<tr>
+
+<th>Total Amount</th>
+
+<td>₹{{ booking.total_price }}</td>
+
+</tr>
+
+</table>
+
+</div>
+
+<form method="POST">
+
+{% csrf_token %}
+
+<input
+type="hidden"
+name="pnr"
+value="{{ booking.pnr }}">
+
+<button
+type="submit"
+name="cancel"
+class="cancel-btn">
+
+Cancel Ticket
+
+</button>
+
+</form>
+
+{% endif %}
+
+{% if success %}
+
+<div class="success">
+
+Ticket Cancelled Successfully ✅
+
+</div>
+
+{% endif %}
+
+</div>
+
+</body>
+</html>

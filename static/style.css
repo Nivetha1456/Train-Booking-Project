@@ -1,0 +1,12 @@
+container{
+            width: 30%;
+            background-color: rgb(218, 244, 192);
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0  0 10px black;
+            margin: auto;
+
+
+        }
