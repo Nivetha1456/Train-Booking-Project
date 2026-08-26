@@ -119,13 +119,13 @@ p{
 }
 
 p strong{
-    color:#0d3b78;      /* Blue labels */
+    color:#0d3b78;      
     font-weight:bold;
 }
 
 .value{
-    color:#000;         /* Black */
-    font-weight:bold;   /* Bold */
+    color:#000;         
+    font-weight:bold;   
     font-size:18px;
 }
 
@@ -142,6 +142,7 @@ p strong{
 <body>
 
 <div class="ticket-container">
+     {% csrf_token %}
 
 <h1 class="ticket-title">
     Train Ticket
@@ -205,10 +206,7 @@ Passenger Details
 
 <td>{{ passenger.gender }}</td>
 
-<!-- <td>
-S9/{{ passenger.seat }}
-{{ passenger.berth }}
-</td> -->
+
 
 <td>
 
