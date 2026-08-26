@@ -1,4 +1,5 @@
  <h2>Booking Confirmed ✅</h2>
+ {% csrf_token %}
 
 <p>Train: {{ train.name }}</p>
 <p>Route: {{ train.source }} → {{ train.destination }}</p>
