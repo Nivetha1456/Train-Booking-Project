@@ -1,11 +1,7 @@
 
- 
  {% load static %}
 
  <style>
-
-
-
 body{
     font-family: Arial, sans-serif;
     margin:0;
@@ -13,8 +9,8 @@ body{
 
     background:
     
-    /* url("{% static 'images-2.png' %}"); */
-     url("{% static 'background_4.png' %}");
+  
+    url("{% static 'background_4.png' %}");
 
     background-size:cover;
     background-position:center;
@@ -272,10 +268,6 @@ form select{
 }
 
 
-
-
-
-
 </style>
 
  
@@ -421,18 +413,6 @@ form select{
         <option>Other</option>
     </select>
 
-     <!-- <select name="berth_preference">
-        <option value="">No Preference</option>
-        <option value="Lower">Lower</option>
-        <option value="Middle">Middle</option>
-        <option value="Upper">Upper</option>
-        <option value="Side Lower">Side Lower</option>
-        <option value="Side Upper">Side Upper</option>
-    </select>  -->
-
-
-
-
  <select name="berth_preference" required>
 
 {% if selected_class == "SL" %}
@@ -499,10 +479,6 @@ form select{
                 <input type="hidden"
                        name="delete_index"
                        value="{{ forloop.counter0 }}">
-
-                <!-- <button type="submit" name="delete">
-                    Delete
-                </button> -->
 
                 <button type="submit" name="delete" class="delete-btn">
                      Delete
