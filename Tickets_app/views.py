@@ -1,7 +1,5 @@
 
-
 import hashlib
-
 from django.shortcuts import render, redirect
 from pymongo import MongoClient
 from bson.objectid import ObjectId
@@ -74,22 +72,22 @@ def register(request):
         password = request.POST.get("password")
         confirm = request.POST.get("confirm_password")
 
-        # check empty
+      
         if not name or not age or not email or not password:
             return render(request, "register.html", {"error": "All fields are required"})
 
-        # password match
+      
         if password != confirm:
             return render(request, "register.html", {"error": "Passwords do not match"})
 
-        # check existing email
+     
         if user_col.find_one({"email": email}):   
             return render(request, "register.html", {"error": "Email already exists"})
 
-        # hash password
+      
         hashed_password = hashlib.sha256(password.encode()).hexdigest()
 
-        # insert into MongoDB
+     
         user_col.insert_one({
             "name": name,
             "age": int(age),
@@ -285,7 +283,7 @@ def edit_profile(request):
         password = request.POST.get("password")
         confirmpassword = request.POST.get("confirmpassword")
 
-        # ✅ PASSWORD CHECK (IMPORTANT)
+       
         if password != confirmpassword:
             return render(request, "edit_profile.html", {
                 "error": "Password and Confirm Password do not match",
@@ -321,7 +319,7 @@ def edit_profile(request):
         print("Matched:", result.matched_count)
         print("Modified:", result.modified_count)
 
-        # update session email if changed
+     
         request.session["email"] = new_email
 
         return redirect("profile")
@@ -387,7 +385,7 @@ from django.shortcuts import render, redirect
 
 def search_trains(request):
 
-    # Check if user is logged in
+ 
     if "email" not in request.session:
         return redirect("login")
 
@@ -436,7 +434,7 @@ def ticket(request):
         "passengers": passengers,
     }
 
-    # Clear passengers after showing ticket
+   
     request.session["passengers"] = []
     request.session.pop("current_train", None)
     request.session.modified = True
@@ -495,30 +493,6 @@ def payment_process(request):
 
             pnr = random.randint(1000000000, 9999999999)
 
-            # ==========================
-            # Coach Allocation
-            # ==========================
-
-            # if selected_class == "SL":
-            #     coach = "S1"
-
-            # elif selected_class == "3AC":
-            #     coach = "B1"
-
-            # elif selected_class == "2AC":
-            #     coach = "A1"
-
-            # elif selected_class == "1AC":
-            #     coach = "H1"
-
-            # else:
-            #     coach = "S1"
-
-            # print("Coach =", coach)
-
-
-
-            
             
             if selected_class == "SL":
              coach = random.choice(["S1","S2","S3","S4","S5","S6","S7","S8","S9","S10"])
@@ -533,12 +507,9 @@ def payment_process(request):
              coach = random.choice(["H1","H2"])
             
                         
-            
-            
-
-            # ==========================
+          
             # Seat Allocation
-            # ==========================
+         
 
             for passenger in passengers:
 
@@ -551,9 +522,9 @@ def payment_process(request):
 
             print(passengers)
 
-            # ==========================
+          
             # SAVE BOOKING
-            # ==========================
+         
 
             booking_col.insert_one({
 
@@ -571,9 +542,9 @@ def payment_process(request):
 
             })
 
-            # ==========================
+        
             # UPDATE AVAILABLE SEATS
-            # ==========================
+         
 
             col.update_one(
                 {"_id": ObjectId(train_id)},
@@ -584,9 +555,9 @@ def payment_process(request):
                 }
             )
 
-            # ==========================
+          
             # SAVE SESSION
-            # ==========================
+        
 
             request.session["pnr"] = pnr
             request.session["passengers"] = passengers
@@ -632,9 +603,9 @@ def net_banking(request):
 
         pnr = random.randint(1000000000, 9999999999)
 
-        # ==========================
+       
         # Coach Allocation
-        # ==========================
+     
 
         if selected_class == "SL":
             coach = "S1"
@@ -651,9 +622,9 @@ def net_banking(request):
         else:
             coach = "S1"
 
-        # ==========================
+     
         # Seat Allocation
-        # ==========================
+       
 
         for passenger in passengers:
 
@@ -664,9 +635,8 @@ def net_banking(request):
                 "No Preference"
             )
 
-        # ==========================
-        # Save Booking
-        # ==========================
+    
+ 
 
         booking_col.insert_one({
 
@@ -684,9 +654,7 @@ def net_banking(request):
 
         })
 
-        # ==========================
-        # Reduce Seats
-        # ==========================
+    
 
         col.update_one(
             {"_id": ObjectId(train_id)},
@@ -697,9 +665,7 @@ def net_banking(request):
             }
         )
 
-        # ==========================
-        # Save Session
-        # ==========================
+     
 
         request.session["pnr"] = pnr
         request.session["train_name"] = train["train_name"]
@@ -715,19 +681,6 @@ def net_banking(request):
     return render(request, "net_banking.html", {
         "total_price": request.session.get("total_price")
     })
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -762,9 +715,7 @@ def credit_card(request):
 
         pnr = random.randint(1000000000, 9999999999)
 
-        # ==========================
-        # Coach Allocation
-        # ==========================
+     
 
         if selected_class == "SL":
             coach = "S1"
@@ -781,9 +732,7 @@ def credit_card(request):
         else:
             coach = "S1"
 
-        # ==========================
-        # Seat Allocation
-        # ==========================
+  
 
         for passenger in passengers:
 
@@ -794,9 +743,7 @@ def credit_card(request):
                 "No Preference"
             )
 
-        # ==========================
-        # Save Booking
-        # ==========================
+      
 
         booking_col.insert_one({
 
@@ -814,9 +761,7 @@ def credit_card(request):
 
         })
 
-        # ==========================
-        # Reduce Seats
-        # ==========================
+       
 
         col.update_one(
 
@@ -830,9 +775,7 @@ def credit_card(request):
 
         )
 
-        # ==========================
-        # Save Session
-        # ==========================
+    
 
         request.session["pnr"] = pnr
         request.session["train_name"] = train["train_name"]
@@ -856,37 +799,6 @@ def credit_card(request):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from bson.objectid import ObjectId
@@ -894,9 +806,7 @@ import random
 
 def book_train(request, train_id):
 
-    # ===============================
-    # GET TRAIN DETAILS
-    # ===============================
+   
 
     train = col.find_one({"_id": ObjectId(train_id)})
 
@@ -915,9 +825,9 @@ def book_train(request, train_id):
     else:
         journey_date = request.session.get("journey_date")
 
-    # ===============================
+
     # START NEW BOOKING
-    # ===============================
+ 
 
     if request.method == "GET":
 
@@ -941,15 +851,13 @@ def book_train(request, train_id):
     print("SESSION PASSENGERS:", request.session.get("passengers"))
     print("PASSENGERS VARIABLE:", passengers)
 
-    # ===============================
-    # POST REQUEST
-    # ===============================
+
 
     if request.method == "POST":
 
-        # ===========================
+     
         # ADD PASSENGER
-        # ===========================
+    
 
         if "add" in request.POST:
 
@@ -971,9 +879,8 @@ def book_train(request, train_id):
                 f"/book/{train_id}/?class={selected_class}&journey_date={journey_date}"
             )
 
-        # ===========================
         # DELETE PASSENGER
-        # ===========================
+     
 
         elif "delete" in request.POST:
 
@@ -993,9 +900,9 @@ def book_train(request, train_id):
 
             
 
-        # =========================
+      
         # CONFIRM BOOKING
-        # =========================
+     
 
         elif "confirm" in request.POST:
 
@@ -1047,9 +954,9 @@ def book_train(request, train_id):
                 "show_mobile": True
             })
 
-        # =========================
-        # SHOW CAPTCHA
-        # =========================
+      
+      
+     
 
         elif "showcaptcha" in request.POST:
 
@@ -1068,9 +975,9 @@ def book_train(request, train_id):
                 "total_passengers": request.session.get("total_passengers")
             })
 
-        # =========================
-        # VERIFY CAPTCHA
-        # =========================
+      
+     
+   
 
         elif "verifycaptcha" in request.POST:
 
@@ -1085,9 +992,9 @@ def book_train(request, train_id):
             else:
                 return HttpResponse("Invalid Captcha")
 
-        # =========================
+       
         # PAYMENT SUCCESS
-        # =========================
+      
 
         elif "payment" in request.POST:
 
@@ -1124,21 +1031,7 @@ def book_train(request, train_id):
                 passenger["berth"] = passenger["berth_preference"]
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-        
-
-
+      
             booking_col.insert_one({
 
                 "pnr": pnr,
@@ -1183,9 +1076,9 @@ def book_train(request, train_id):
 
             })
 
-    # =========================
+
     # BOOK PAGE
-    # =========================
+  
 
     return render(request, "book.html", {
 
